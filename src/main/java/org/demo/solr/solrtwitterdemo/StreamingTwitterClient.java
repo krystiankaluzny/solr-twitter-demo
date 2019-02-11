@@ -110,6 +110,7 @@ class StreamingTwitterClient implements AutoCloseable {
                 connectToTweeterStream(this);
             }
             else {
+                log.error("Some error", throwable);
                 emitter.onError(throwable);
             }
         }
