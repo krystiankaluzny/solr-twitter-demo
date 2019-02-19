@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="minimal" version="1.1">
+
+    <field name="text" type="text" indexed="true" stored="true" multiValued="false" required="true" />
+    <field name="profileImgUrl" type="text" indexed="false" stored="true" multiValued="false" required="false" />
+    <field name="lang" type="text" indexed="true" stored="true" multiValued="false" required="false" />
+    <field name="userScreenName" type="text" indexed="false" stored="true" multiValued="false" required="false" />
+    <field name="userLocation" type="text" indexed="false" stored="true" multiValued="false" required="false" />
+
+    <fieldType name="text" class="solr.TextField" >
+        <analyzer>
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.StandardFilterFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+    </fieldType>
+</schema>
