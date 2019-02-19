@@ -16,13 +16,18 @@ class TweetsConsumer {
     private final ObjectMapper objectMapper;
     private final StreamingTwitterClient streamingTwitterClient;
     private final TweetRepository dbTweetRepository;
+    private final TweetRepository solrTweetRepository;
 
     private Disposable disposable;
 
-    TweetsConsumer(ObjectMapper objectMapper, StreamingTwitterClient streamingTwitterClient, TweetRepository dbTweetRepository) {
+    TweetsConsumer(ObjectMapper objectMapper,
+                   StreamingTwitterClient streamingTwitterClient,
+                   TweetRepository dbTweetRepository,
+                   TweetRepository solrTweetRepository) {
         this.objectMapper = objectMapper;
         this.streamingTwitterClient = streamingTwitterClient;
         this.dbTweetRepository = dbTweetRepository;
+        this.solrTweetRepository = solrTweetRepository;
     }
 
     void startConsuming() {
@@ -35,6 +40,7 @@ class TweetsConsumer {
             .subscribe(tweet -> {
                 log.debug("{}", tweet);
                 dbTweetRepository.add(tweet);
+                solrTweetRepository.add(tweet);
             });
     }
 
